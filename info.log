@@ -1,0 +1,27 @@
+{"message":"Unauthorized request to path: /","level":"error"}
+{"message":"You logged a login brother","level":"info"}
+{"message":"Bookmark with id fsdaf not found.","level":"error"}
+{"message":"Bookmark with id c5fe27a3-a85f-4955-9325-b12090f305a3 created.","level":"info"}
+{"message":"Title is required","level":"error"}
+{"message":"Bookmark with id 645a800f-45f9-4d22-867c-a41b6a892939 created.","level":"info"}
+{"message":"Title is required","level":"error"}
+{"message":"Bookmark with id 16676fe8-fd89-452f-8d2f-60845ac4187f created.","level":"info"}
+{"message":"Title is required","level":"error"}
+{"message":"Bookmark with id edcad620-076d-4c9d-a751-4c62d2deeb29 created.","level":"info"}
+{"message":"Title is required","level":"error"}
+{"message":"Bookmark with id 33a020a5-49b4-48c4-b1fd-5454b3b22d61 created.","level":"info"}
+{"message":"Title is required","level":"error"}
+{"message":"URL is required","level":"error"}
+{"message":"Bookmark with id 2e24aa8c-e0a1-4aaf-b2f6-550fe3106122 created.","level":"info"}
+{"message":"Bookmark with id cjozyzeqh0001lxygb8mhnvhz deleted.","level":"info"}
+{"message":"Bookmark with id cjozyzeqh0001lxygb8mhnvhz not found.","level":"error"}
+{"message":"Bookmark with id b3fb0abe-8a35-4dc4-be3f-a5474557ff0c created.","level":"info"}
+{"message":"Invalid rating '6' supplied","level":"error"}
+{"message":"Invalid rating '-1' supplied","level":"error"}
+{"message":"Invalid rating 'cheese' supplied","level":"error"}
+{"message":"Invalid rating '4' supplied","level":"error"}
+{"message":"Bookmark with id ffba2714-14d9-4eee-9e50-c662e79a49f3 created.","level":"info"}
+{"message":"Invalid url 'street' supplied","level":"error"}
+{"message":"Invalid url 'street.com' supplied","level":"error"}
+{"message":"Invalid url 'www.street.com' supplied","level":"error"}
+{"message":"Bookmark with id 4eae9a5d-5200-47fb-bfc3-b9ffca9ddee6 created.","level":"info"}
