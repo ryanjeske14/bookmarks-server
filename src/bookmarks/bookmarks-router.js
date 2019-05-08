@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const logger = require("../logger");
 const xss = require("xss");
@@ -16,7 +17,7 @@ const serializeBookmark = bookmark => ({
 });
 
 bookmarksRouter
-  .route("/bookmarks")
+  .route("/")
   .get((req, res, next) => {
     const knexInstance = req.app.get("db");
     BookmarksService.getAllBookmarks(knexInstance)
@@ -59,14 +60,14 @@ bookmarksRouter
         logger.info(`Bookmark with id ${bookmark.id} created.`);
         res
           .status(201)
-          .location(`/bookmarks/${bookmark.id}`)
+          .location(path.posix.join(req.originalUrl, `/${bookmark.id}`))
           .json(serializeBookmark(bookmark));
       })
       .catch(next);
   });
 
 bookmarksRouter
-  .route("/bookmarks/:bookmark_id")
+  .route("/:bookmark_id")
   .all((req, res, next) => {
     const { bookmark_id } = req.params;
     BookmarksService.getById(req.app.get("db"), bookmark_id)
@@ -90,6 +91,44 @@ bookmarksRouter
     BookmarksService.deleteBookmark(req.app.get("db"), bookmark_id)
       .then(numRowsAffected => {
         logger.info(`Bookmark with id ${bookmark_id} deleted.`);
+        res.status(204).end();
+      })
+      .catch(next);
+  })
+  .patch(bodyParser, (req, res, next) => {
+    const { title, url, rating, description } = req.body;
+    const bookmarkToUpdate = { title, url, rating, description };
+
+    const numberOfValues = Object.values(bookmarkToUpdate).filter(Boolean)
+      .length;
+    if (numberOfValues === 0) {
+      return res.status(400).json({
+        error: {
+          message: `Request body must contain either 'title', 'url' or 'rating'`
+        }
+      });
+    }
+
+    if ((rating && !Number.isInteger(rating)) || rating < 0 || rating > 5) {
+      logger.error(`Invalid rating '${rating}' supplied`);
+      return res.status(400).send({
+        error: { message: `'rating' must be a number between 0 and 5` }
+      });
+    }
+
+    if (url && !isWebUri(url)) {
+      logger.error(`Invalid url '${url}' supplied`);
+      return res.status(400).send({
+        error: { message: `'url' must be a valid URL` }
+      });
+    }
+
+    BookmarksService.updateBookmark(
+      req.app.get("db"),
+      req.params.bookmark_id,
+      bookmarkToUpdate
+    )
+      .then(numRowsAffected => {
         res.status(204).end();
       })
       .catch(next);
